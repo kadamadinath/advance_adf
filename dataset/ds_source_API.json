@@ -7,6 +7,9 @@
 		},
 		"annotations": [],
 		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "en/docs?hourly=&current=temperature_2m,precipitation,pressure_msl,wind_speed_10m,is_day,wind_direction_10m,rain"
+		},
 		"schema": []
 	}
 }
