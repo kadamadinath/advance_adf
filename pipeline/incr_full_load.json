@@ -61,7 +61,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "SELECT COUNT(*) AS totalCount FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table} WHERE last_updated > '@{activity('last_cdc').output.value[0].cdc}'",
+								"value": "SELECT COUNT(*) AS totalCount FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table} WHERE last_updated > '@{if(empty(pipeline().parameters.date),activity('last_cdc').output.value[0].cdc,pipeline().parameters.date)}'",
 								"type": "Expression"
 							}
 						}
@@ -103,7 +103,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "SELECT * FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table} WHERE last_updated > '@{activity('last_cdc').output.value[0].cdc}'",
+										"value": "SELECT * FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table} WHERE last_updated > '@{if(empty(pipeline().parameters.date),activity('last_cdc').output.value[0].cdc,pipeline().parameters.date)}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -253,6 +253,10 @@
 			"table": {
 				"type": "string",
 				"defaultValue": "Orders"
+			},
+			"date": {
+				"type": "string",
+				"defaultValue": "2025-09-27"
 			}
 		},
 		"annotations": []
