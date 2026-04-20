@@ -70,7 +70,7 @@
 				}
 			},
 			{
-				"name": "newdata",
+				"name": "if_new_data",
 				"type": "IfCondition",
 				"dependsOn": [
 					{
