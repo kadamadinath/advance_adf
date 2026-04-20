@@ -34,11 +34,16 @@
 				}
 			},
 			{
-				"name": "ScriptCDC",
+				"name": "rowCount",
 				"type": "Script",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "last_cdc",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -56,7 +61,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "@activity('cdc').output",
+								"value": "SELECT COUNT(*) AS total_count FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table} ",
 								"type": "Expression"
 							}
 						}
@@ -67,14 +72,9 @@
 			{
 				"name": "load",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "last_cdc",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -128,6 +128,8 @@
 			{
 				"name": "max_cdc",
 				"type": "Script",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "load",
@@ -153,7 +155,7 @@
 						{
 							"type": "Query",
 							"text": {
-								"value": "SELECT MAX(last_updated) FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table}",
+								"value": "SELECT MAX(last_updated) as cdc FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table}",
 								"type": "Expression"
 							}
 						}
@@ -164,6 +166,8 @@
 			{
 				"name": "update_cdc",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "max_cdc",
@@ -187,7 +191,7 @@
 							{
 								"name": "cdc",
 								"value": {
-									"value": "@activity('max_cdc').output",
+									"value": "@activity('max_cdc').output.resultSets[0].rows[0].cdc",
 									"type": "Expression"
 								}
 							}
