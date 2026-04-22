@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "pokeman.json",
 				"folderPath": "Rest",
 				"fileSystem": "advadf-bronze"
 			}

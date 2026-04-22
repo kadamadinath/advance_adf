@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Web1",
+				"name": "WebCheck",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
@@ -24,7 +24,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Web1",
+						"activity": "WebCheck",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -45,7 +45,7 @@
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET",
 						"paginationRules": {
-							"supportRFC5988": "true"
+							"QueryParameters.offset": "RANGE:0:1350:20"
 						}
 					},
 					"sink": {
@@ -62,7 +62,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_rest_API",
+						"referenceName": "ds_source_api",
 						"type": "DatasetReference"
 					}
 				],
