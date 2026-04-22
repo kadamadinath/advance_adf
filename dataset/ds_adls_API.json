@@ -1,0 +1,19 @@
+{
+	"name": "ds_adls_API",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Rest",
+				"fileSystem": "advadf-bronze"
+			}
+		},
+		"schema": {}
+	}
+}
