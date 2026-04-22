@@ -1,0 +1,23 @@
+{
+	"name": "ds_files_adls",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "files",
+				"fileSystem": "advadf-bronze"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
