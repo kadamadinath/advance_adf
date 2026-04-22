@@ -45,7 +45,10 @@
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET",
 						"paginationRules": {
-							"QueryParameters.offset": "RANGE:0:1350:20"
+							"QueryParameters.offset": {
+								"value": "@activity('WebCheck').output.last",
+								"type": "Expression"
+							}
 						}
 					},
 					"sink": {
