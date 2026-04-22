@@ -47,7 +47,18 @@
 					"items": {
 						"value": "@activity('GetFiles').output.childItems",
 						"type": "Expression"
-					}
+					},
+					"activities": [
+						{
+							"name": "Switch1",
+							"type": "Switch",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"cases": []
+							}
+						}
+					]
 				}
 			}
 		],
