@@ -46,7 +46,7 @@
 						"requestMethod": "GET",
 						"paginationRules": {
 							"QueryParameters.offset": {
-								"value": "RANGE:0:@{activity('WebCheck')}.output.count}:20",
+								"value": "RANGE:0:@{activity('WebCheck').output.count}:20",
 								"type": "Expression"
 							}
 						}
